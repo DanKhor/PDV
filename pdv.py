@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from modules.matrix_computations import cov_between_class, cov_total, eigen_find
+from PDV.matrix_computations import cov_between_class, cov_total, eigen_find
 
 
 class PDV:
