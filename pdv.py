@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from PDV.matrix_computations import cov_between_class, cov_total, eigen_find
+from PDV.matrix_computations import cov_between_class, cov_total, eigen_find, cov_within_class
 
 
 class PDV:
@@ -28,7 +28,8 @@ class PDV:
         if self.n_components is None:
             self.n_components = min(X.shape[0], X.shape[1])
         B = cov_between_class(X, y)
-        T = cov_total(X)
+ #       T = cov_total(X)
+        T = cov_within_class(X, y)
         P = np.eye(B.shape[0])
 
         #создадим массив компонент
@@ -40,7 +41,7 @@ class PDV:
 
             alpha, a = eigen_find(A_, B_)
             components[i] = a
-            P = (np.eye(B.shape[0]) - a.reshape(-1, 1).dot(a.reshape(1, -1))).dot(P)
+            P = (np.eye(B.shape[0]) - a[:, np.newaxis].dot(a[np.newaxis, :])).dot(P)
 
         self.components = components
 
