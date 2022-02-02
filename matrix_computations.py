@@ -15,7 +15,8 @@ def cov_between_class(X, y):
         X_k = X[np.where(y == classes[i])]
         m_k = features_mean(X_k)
         in_out_diff = m_k - m
-        B += ((in_out_diff)[:, np.newaxis].dot(in_out_diff[np.newaxis, :])) * classes_counts[i]
+        B_k = ((in_out_diff)[:, np.newaxis].dot(in_out_diff[np.newaxis, :])) * classes_counts[i]
+        B += B_k
     return B / X.shape[0]
 
 
@@ -30,7 +31,8 @@ def cov_within_class(X, y):
     W = np.zeros((X.shape[1], X.shape[1]))
     for i in range(len(classes)):
         X_k = X[np.where(y == classes[i])]
-        W += np.cov(X_k.T) * classes_counts[i]
+        W_k = np.cov(X_k.T) * classes_counts[i]
+        W += W_k
     return W / X.shape[0]
 
 
