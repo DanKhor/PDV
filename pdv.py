@@ -28,8 +28,8 @@ class PDV:
         if self.n_components is None:
             self.n_components = min(X.shape[0], X.shape[1])
         B = cov_between_class(X, y)
- #       T = cov_total(X)
-        T = cov_within_class(X, y)
+        T = cov_total(X)
+ #       T = cov_within_class(X, y)
         P = np.eye(B.shape[0])
 
         #создадим массив компонент
