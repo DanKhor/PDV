@@ -50,8 +50,10 @@ class PDV:
         if self.components is not None:
             return X.dot(self.components.T)
         else:
-            raise ValueError('PDV components is empy')
+            raise ValueError('PDV components is empty')
 
     def fit_transform(self, X, y):
-        self = self.fit(X, y)
+        self.fit(X, y)
         return self.transform(X)
+
+

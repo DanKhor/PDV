@@ -41,5 +41,8 @@ def eigen_find(A, B):
     S = np.diag(s)
     S_pinv = pinv(S)
     eig_vals, eig_vec = eig(S_pinv.dot(U.T).dot(A).dot(U).dot(S_pinv))
+    #select largest eigenvalues
+    eig_pairs = [[np.abs(eig_vals[i]), eig_vec[:, i]] for i in range(len(eig_vals))]
+    eig_pairs.sort(key=lambda x: x[0], reverse=True)
 
-    return np.real(eig_vals[0]), np.real(eig_vec[:, 0])
+    return eig_pairs[0][0].real, eig_pairs[0][1].real
