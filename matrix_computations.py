@@ -12,19 +12,17 @@ def cov_between_class(X, y):
     B = np.zeros((X.shape[1], X.shape[1]))
     m = features_mean(X)
     for i in range(len(classes)):
-        in_out_diff = np.mean(X[np.where(y == classes[i])], axis=0) - m
-        B += (in_out_diff)[:, np.newaxis].dot(in_out_diff[np.newaxis, :]) / classes_counts[i]
+        X_k = X[np.where(y == classes[i])]
+        m_k = features_mean(X_k)
+        in_out_diff = m_k - m
+        B += ((in_out_diff)[:, np.newaxis].dot(in_out_diff[np.newaxis, :])) * classes_counts[i]
     return B / X.shape[0]
 
 
 def cov_total(X):
     #matrix T in PDV
-    T = np.zeros((X.shape[1], X.shape[1]))
     m = features_mean(X)
-    for i in range(X.shape[0]):
-        obj_centr = X[i] - m
-        T += obj_centr[:, np.newaxis].dot(obj_centr[np.newaxis, :])
-    return T / X.shape[0]
+    return ((X - m).T).dot((X-m)) / X.shape[0]
 
 
 def cov_within_class(X, y):
