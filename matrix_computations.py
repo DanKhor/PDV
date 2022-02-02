@@ -27,6 +27,17 @@ def cov_total(X):
     return T / X.shape[0]
 
 
+def cov_within_class(X, y):
+    #matrix W in PDV
+    classes, classes_counts = np.unique(y, return_counts=True)
+    W = np.zeros((X.shape[1], X.shape[1]))
+    for i in range(len(classes)):
+        X_k = X[np.where(y == classes[i])]
+        m_k = features_mean(X_k)
+        W += ((X_k - m_k).T).dot((X_k - m_k))
+    return W / X.shape[0]
+
+
 def eigen_find(A, B):
     U, s, _ = svd(B)
     S = np.diag(s)
