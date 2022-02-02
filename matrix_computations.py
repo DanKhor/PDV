@@ -21,8 +21,7 @@ def cov_between_class(X, y):
 
 def cov_total(X):
     #matrix T in PDV
-    m = features_mean(X)
-    return ((X - m).T).dot((X-m)) / X.shape[0]
+    return np.cov(X.T)
 
 
 def cov_within_class(X, y):
@@ -31,8 +30,7 @@ def cov_within_class(X, y):
     W = np.zeros((X.shape[1], X.shape[1]))
     for i in range(len(classes)):
         X_k = X[np.where(y == classes[i])]
-        m_k = features_mean(X_k)
-        W += ((X_k - m_k).T).dot((X_k - m_k))
+        W += np.cov(X_k.T)
     return W / X.shape[0]
 
 
