@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.linalg import svd, eig, pinv
+from numpy.linalg import svd, eig, pinv, eigh
 
 
 def features_mean(X):
@@ -37,10 +37,11 @@ def cov_within_class(X, y):
 
 
 def eigen_find(A, B):
-    U, s, _ = svd(B)
-    S = np.diag(s)
-    S_pinv = pinv(S)
-    eig_vals, eig_vec = eig(S_pinv.dot(U.T).dot(A).dot(U).dot(S_pinv))
+  #  U, s, _ = svd(B)
+  #  S = np.diag(s)
+  #  S_pinv = pinv(S)
+  #  eig_vals, eig_vec = eig(S_pinv.dot(U.T).dot(A).dot(U).dot(S_pinv))
+    eig_vals, eig_vec = eigh(A, B)
     #select largest eigenvalues
     eig_pairs = [[np.abs(eig_vals[i]), eig_vec[:, i]] for i in range(len(eig_vals))]
     eig_pairs.sort(key=lambda x: x[0], reverse=True)
