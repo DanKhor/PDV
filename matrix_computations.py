@@ -31,7 +31,7 @@ def cov_within_class(X, y):
     W = np.zeros((X.shape[1], X.shape[1]))
     for i in range(len(classes)):
         X_k = X[np.where(y == classes[i])]
-        W_k = np.cov(X_k.T) * classes_counts[i]
+        W_k = np.cov(X_k.T) * (classes_counts[i] - 1)
         W += W_k
     return W / X.shape[0]
 
