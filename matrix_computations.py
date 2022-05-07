@@ -1,5 +1,6 @@
 import numpy as np
-from numpy.linalg import svd, eig, pinv, eigh
+from numpy.linalg import svd, pinv, eigh
+from scipy.linalg import eig
 
 
 def features_mean(X):
@@ -41,7 +42,7 @@ def eigen_find(A, B):
   #  S = np.diag(s)
   #  S_pinv = pinv(S)
   #  eig_vals, eig_vec = eig(S_pinv.dot(U.T).dot(A).dot(U).dot(S_pinv))
-    eig_vals, eig_vec = eigh(A, B)
+    eig_vals, eig_vec = eig(A, B)
     #select largest eigenvalues
     eig_pairs = [[np.abs(eig_vals[i]), eig_vec[:, i]] for i in range(len(eig_vals))]
     eig_pairs.sort(key=lambda x: x[0], reverse=True)
