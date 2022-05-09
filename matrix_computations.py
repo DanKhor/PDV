@@ -1,6 +1,6 @@
 import numpy as np
-from numpy.linalg import svd, pinv, eigh
-from scipy.linalg import eig
+from numpy.linalg import svd, pinv
+from scipy.linalg import eig, eigh
 
 
 def features_mean(X):
