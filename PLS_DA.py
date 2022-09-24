@@ -38,10 +38,10 @@ class PLS_DA:
             E_0 = E_0 - T_p.dot(P_p.T)
             F_0 = F_0 - T_p.dot(Q_p.T)
 
-            self.W[:, p-1] = W_p
-            self.T[:, p-1] = T_p
-            self.P[:, p-1] = P_p
-            self.Q[:, p-1] = Q_p
+            self.W[:, p-1] = W_p[:, 0]
+            self.T[:, p-1] = T_p[:, 0]
+            self.P[:, p-1] = P_p[:, 0]
+            self.Q[:, p-1] = Q_p[:, 0]
 
         self.B = (W.dot(inv((P.T).dot(W)))).dot(Q.T)
 
