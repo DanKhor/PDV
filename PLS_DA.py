@@ -26,7 +26,7 @@ class PLS_DA:
 
         self.W = np.empty((X.shape[1], p))
         self.T = np.empty((X.shape[0], p))
-        self.P = np.empty((X.shape[1]. p))
+        self.P = np.empty((X.shape[1], p))
         self.Q = np.empty((1, p))
 
         for i in range(p):
