@@ -43,7 +43,7 @@ class PLS_DA:
             self.P[:, p-1] = P_p[:, 0]
             self.Q[:, p-1] = Q_p[:, 0]
 
-        self.B = (W.dot(inv((P.T).dot(W)))).dot(Q.T)
+        self.B = (self.W.dot(inv((self.P.T).dot(self.W)))).dot(self.Q.T)
 
         return self
 
