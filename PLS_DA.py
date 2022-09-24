@@ -24,6 +24,11 @@ class PLS_DA:
         E_0 = X.copy()
         F_0 = y.copy()
 
+        self.W = np.empty((X.shape[1], p))
+        self.T = np.empty((X.shape[0], p))
+        self.P = np.empty((X.shape[1]. p))
+        self.Q = np.empty((1, p))
+
         for i in range(p):
             W_p = (E_0.T).dot(F_0)
             temp_matrix = np.power((((W_p.T).dot(E_0.T)).dot(E_0)).dot(W_p), -0.5)
@@ -33,11 +38,12 @@ class PLS_DA:
             E_0 = E_0 - T_p.dot(P_p.T)
             F_0 = F_0 - T_p.dot(Q_p.T)
 
-        self.W = W_p
-        self.T = T_p
-        self.P = P_p
-        self.Q = Q_p
-        self.B = (W_p.dot(inv((P_p.T).dot(W_p)))).dot(Q_p.T)
+            self.W[:, p] = W_p
+            self.T[:, p] = T_p
+            self.P[:, p] = P_p
+            self.Q[:, p] = Q_p
+
+        self.B = (W.dot(inv((P.T).dot(W)))).dot(Q.T)
 
         return self
 

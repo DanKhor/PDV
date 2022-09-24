@@ -24,6 +24,8 @@ class PDV:
 
         self.components = None
 
+        self.explained_variance_ratio_ = None
+
     def fit(self, X, y):
         if self.n_components is None:
             self.n_components = min(X.shape[0], X.shape[1])
@@ -44,6 +46,7 @@ class PDV:
             P = (np.eye(B.shape[0]) - a[:, np.newaxis].dot(a[np.newaxis, :])).dot(P)
 
         self.components = components
+        self.explained_variance_ratio_ = np.diag(np.cov(X.dot(self.components.T).T)) / np.sum(np.diag(T))
 
         return self
 
